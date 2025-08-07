@@ -78,8 +78,6 @@ If you're getting started and need assistance or face any bugs, join our active 
 
 👉 **Popularity algorithm**: Track user searches to display the most popular movies
 
-(etc)
-
 and many more, including code architecture and reusability.
 
 ## <a name="quick-start">🤸 Quick Start</a>

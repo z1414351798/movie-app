@@ -97,11 +97,9 @@ Make sure you have the following installed on your machine:
 **Cloning the Repository**
 
 ```bash
-
 git clone https://github.com/adrianhajdin/rn-movie-app.git
 
 cd rn-movie-app
-
 ```
 
 **Installation**
@@ -109,9 +107,7 @@ cd rn-movie-app
 Install the project dependencies using npm:
 
 ```bash
-
 npm install
-
 ```
 
 **Set Up Environment Variables**
@@ -127,9 +123,6 @@ EXPO_PUBLIC_APPWRITE_PROJECT_ID=
 EXPO_PUBLIC_APPWRITE_DATABASE_ID=
 
 EXPO_PUBLIC_APPWRITE_COLLECTION_ID=
-
-
-
 ```
 
 Replace the placeholder values with your actual TMDB API key, Appwrite project ID, Database ID, and Collection ID. You can obtain these credentials by signing up on the [Appwrite](https://jsm.dev/rn25-appwrite), [TMDB](https://www.themoviedb.org/login).

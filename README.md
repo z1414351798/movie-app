@@ -1,7 +1,7 @@
 <div align="center">
   <br />
     <a href="https://www.youtube.com/watch?v=f8Z9JyB2EIE" target="_blank">
-      <img src="https://github.com/user-attachments/assets/0cb17079-9b42-4a6f-9023-d82642fff73b" alt="Project Banner">
+      <img src="assets/readme/hero.webp" alt="Project Banner">
     </a>
   <br />
 
@@ -54,15 +54,17 @@ If you're getting started and need assistance or face any bugs, join our active 
 
 ## <a name="tech-stack">⚙️ Tech Stack</a>
 
-- Expo
+- **[Expo](https://expo.dev/)** is an open-source platform for building universal native apps (Android, iOS, web) using JavaScript/TypeScript and React Native. It features file-based routing via Expo Router, fast refresh, native modules for camera/maps/notifications, over-the-air updates (EAS), and streamlined app deployment.
 
-- React Native
+- **[React Native](https://reactnative.dev/)** is a framework for building mobile UIs with React. It enables component‑based, cross-platform development with declarative UI, deep native API support, and is tightly integrated with Expo for navigation and native capabilities.
 
-- Appwrite
+- **[Appwrite](https://jsm.dev/rn25-appwrite)** is an open-source backend-as-a-service platform offering secure authentication (email/password, OAuth, SMS, magic links), databases, file storage with compression/encryption, real-time messaging, serverless functions, and static site hosting via Appwrite Sites—all managed through a unified console and microservices architecture.
 
-- TypeScript
+- **[TypeScript](https://www.typescriptlang.org/)** is a statically-typed superset of JavaScript providing type annotations, interfaces, enums, generics, and enhanced tooling. It improves error detection, code quality, and scalability—ideal for robust, maintainable projects.
 
-- Tailwind CSS
+- **[Tailwind CSS](https://tailwindcss.com/)** is a utility-first CSS framework enabling rapid UI design via low-level classes. In React Native/Expo, it’s commonly used with NativeWind to apply Tailwind-style utilities to mobile components.
+
+- **[NativeWind](https://www.nativewind.dev/)** brings Tailwind CSS to React Native and Expo, allowing you to style mobile components using utility-first classes for fast, consistent, and responsive UI design.
 
 ## <a name="features">🔋 Features</a>
 
@@ -132,7 +134,7 @@ EXPO_PUBLIC_APPWRITE_COLLECTION_ID=
 
 ```
 
-Replace the placeholder values with your actual TMDB API key, Appwrite project ID, Database ID, and Collection ID. You can obtain these credentials by signing up on the [Appwrite](https://cloud.appwrite.io/console/login), [TMDB](https://www.themoviedb.org/login).
+Replace the placeholder values with your actual TMDB API key, Appwrite project ID, Database ID, and Collection ID. You can obtain these credentials by signing up on the [Appwrite](https://jsm.dev/rn25-appwrite), [TMDB](https://www.themoviedb.org/login).
 
 **Running the Project**
 
@@ -275,7 +277,11 @@ interface TrendingCardProps {
 
 ## <a name="links">🔗 Assets</a>
 
-- Assets used in the project can be found [here](https://drive.google.com/file/d/1_8eNj07rNS7B-JyCZ-lj1GtRYG03Ye-M/view)
+Assets and snippets used in the project can be found in the **[video kit](https://jsm.dev/rn25-movie)**.
+
+<a href="https://jsm.dev/rn25-movie" target="_blank">
+  <img src="assets/readme/videokit.webp" alt="Video Kit Banner">
+</a>
 
 ## <a name="more">🚀 More</a>
 
@@ -285,8 +291,6 @@ Enjoyed creating this project? Dive deeper into our PRO courses for a richer lea
 
 detailed explanations, cool features, and exercises to boost your skills. Give it a go!
 
-<a href="https://jsmastery.pro/next15" target="_blank">
-
-   <img src="https://github.com/user-attachments/assets/b8760e69-1f81-4a71-9108-ceeb1de36741" alt="Project Banner">
-
+<a href="https://jsm.dev/rn25-jsm" target="_blank">
+   <img src="assets/readme/jsmpro.webp" alt="Project Banner">
 </a>

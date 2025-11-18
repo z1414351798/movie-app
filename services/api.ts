@@ -52,3 +52,18 @@ export const fetchMovieDetails = async (
     throw error;
   }
 };
+
+// services/api.ts
+export const fetchMovieVideos = async (id: string) => {
+  const res = await fetch(
+    `https://api.themoviedb.org/3/movie/${id}/videos`,
+    {
+      method: "GET",
+      headers: TMDB_CONFIG.headers,
+    }
+  );
+
+  if (!res.ok) throw new Error("Failed to fetch video");
+  return res.json();
+};
+

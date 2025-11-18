@@ -8,10 +8,17 @@ import {
 } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
-
+import { Modal } from "react-native";
+import { WebView } from "react-native-webview";
+import { useEffect, useState, version } from "react";
 import { icons } from "@/constants/icons";
 import useFetch from "@/services/usefetch";
-import { fetchMovieDetails } from "@/services/api";
+import { fetchMovieDetails, fetchMovieVideos } from "@/services/api";
+
+import TrailerPlayer from "@/components/TrailerPlayer";
+import { getSavedMovieById } from "@/services/appwrite";
+import { updateSavedMovie } from "@/services/appwrite";
+
 
 interface MovieInfoProps {
   label: string;
@@ -27,13 +34,63 @@ const MovieInfo = ({ label, value }: MovieInfoProps) => (
   </View>
 );
 
+
+
+
+
 const Details = () => {
   const router = useRouter();
   const { id } = useLocalSearchParams();
+  const [showTrailer, setShowTrailer] = useState(false);  
+  const [isSaved, setIsSaved] = useState(false);
 
   const { data: movie, loading } = useFetch(() =>
     fetchMovieDetails(id as string)
   );
+  const { data: videos } = useFetch(() => fetchMovieVideos(id as string));
+  const {
+    data: savedMovie,
+    loading: savedLoading,
+    error: savedError,
+  } = useFetch(() => getSavedMovieById(id));
+  useEffect(() => {
+  if (!savedMovie || savedMovie.length === 0) {
+    setIsSaved(false);  // no document → not saved
+  } else {
+    setIsSaved(savedMovie[0].saved === true); // read saved field
+  }
+}, [savedMovie]);
+
+const toggleSave = async () => {
+  if (!movie) return;
+
+  const newState = !isSaved;
+
+  try {
+    await updateSavedMovie(id, movie, newState); 
+    setIsSaved(newState);
+  } catch (e) {
+    console.error(e);
+    alert("Failed to update saved state");
+  }
+};
+
+
+
+
+  const trailer = videos?.results?.find(
+    (v) => v.site === "YouTube" && (v.type === "Trailer" || v.type === "Teaser")
+  );
+
+  const trailerKey = trailer
+    ? trailer.key
+    : null;
+
+  const playTrailer = () => {
+    if (trailerKey) setShowTrailer(true);
+    else alert("No trailer available");
+  };
+
 
   if (loading)
     return (
@@ -54,17 +111,26 @@ const Details = () => {
             resizeMode="stretch"
           />
 
-          <TouchableOpacity className="absolute bottom-5 right-5 rounded-full size-14 bg-white flex items-center justify-center">
-            <Image
-              source={icons.play}
-              className="w-6 h-7 ml-1"
-              resizeMode="stretch"
-            />
+          <TouchableOpacity
+            onPress={playTrailer}
+            className="absolute bottom-5 right-5 rounded-full size-14 bg-white flex items-center justify-center"
+          >
+            <Image source={icons.play} className="w-6 h-7 ml-1" resizeMode="stretch" />
           </TouchableOpacity>
+
         </View>
 
         <View className="flex-col items-start justify-center mt-5 px-5">
           <Text className="text-white font-bold text-xl">{movie?.title}</Text>
+          <TouchableOpacity
+  onPress={toggleSave}
+  className="absolute top-5 right-5 bg-black/50 p-3 rounded-full"
+>
+  <Text className="text-white text-2xl">
+    {isSaved ? "❤️" : "🤍"}
+  </Text>
+</TouchableOpacity>
+
           <View className="flex-row items-center gap-x-1 mt-2">
             <Text className="text-light-200 text-sm">
               {movie?.release_date?.split("-")[0]} •
@@ -112,6 +178,21 @@ const Details = () => {
           />
         </View>
       </ScrollView>
+
+      <Modal visible={showTrailer} animationType="slide">
+        <SafeAreaView className="flex-1 bg-black">
+          <TouchableOpacity
+            className="absolute top-5 left-5 z-50 bg-white px-4 py-2 rounded-full"
+            onPress={() => setShowTrailer(false)}
+          >
+            <Text className="text-black font-bold">Close</Text>
+          </TouchableOpacity>
+
+          <TrailerPlayer videoKey= {trailerKey}></TrailerPlayer>
+
+        </SafeAreaView>
+      </Modal>
+
 
       <TouchableOpacity
         className="absolute bottom-5 left-0 right-0 mx-5 bg-accent rounded-lg py-3.5 flex flex-row items-center justify-center z-50"

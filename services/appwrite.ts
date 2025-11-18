@@ -1,17 +1,17 @@
 import { Client, Databases, ID, Query } from "react-native-appwrite";
 
 const DATABASE_ID = process.env.EXPO_PUBLIC_APPWRITE_DATABASE_ID!;
-const COLLECTION_ID = process.env.EXPO_PUBLIC_APPWRITE_COLLECTION_ID!;
+const ENDPOINT = process.env.EXPO_PUBLIC_APPWRITE_ENDPOINT!;
 
 const client = new Client()
-  .setEndpoint("https://cloud.appwrite.io/v1")
+  .setEndpoint(ENDPOINT)
   .setProject(process.env.EXPO_PUBLIC_APPWRITE_PROJECT_ID!);
 
 const database = new Databases(client);
 
 export const updateSearchCount = async (query: string, movie: Movie) => {
   try {
-    const result = await database.listDocuments(DATABASE_ID, COLLECTION_ID, [
+    const result = await database.listDocuments(DATABASE_ID, "metrics", [
       Query.equal("searchTerm", query),
     ]);
 
@@ -19,18 +19,18 @@ export const updateSearchCount = async (query: string, movie: Movie) => {
       const existingMovie = result.documents[0];
       await database.updateDocument(
         DATABASE_ID,
-        COLLECTION_ID,
+        "metrics",
         existingMovie.$id,
         {
           count: existingMovie.count + 1,
         }
       );
     } else {
-      await database.createDocument(DATABASE_ID, COLLECTION_ID, ID.unique(), {
+      await database.createDocument(DATABASE_ID, "metrics", ID.unique(), {
         searchTerm: query,
         movie_id: movie.id,
         title: movie.title,
-        count: 1,
+        searched: true,
         poster_url: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
       });
     }
@@ -44,12 +44,79 @@ export const getTrendingMovies = async (): Promise<
   TrendingMovie[] | undefined
 > => {
   try {
-    const result = await database.listDocuments(DATABASE_ID, COLLECTION_ID, [
+    const result = await database.listDocuments(DATABASE_ID, "metrics", [
+      Query.equal("searched",true),
       Query.limit(5),
       Query.orderDesc("count"),
     ]);
 
     return result.documents as unknown as TrendingMovie[];
+  } catch (error) {
+    console.error(error);
+    return undefined;
+  }
+
+
+};
+
+export const updateSavedMovie = async (id: string, movie: MovieDetails, saved: boolean) => {
+  try {
+    const result = await database.listDocuments(DATABASE_ID, "saved-movie", [
+      Query.equal("id", id),
+    ]);
+
+    if (result.documents.length > 0) {
+      // update only saved field
+      await database.updateDocument(
+        DATABASE_ID,
+        "saved-movie",
+        result.documents[0].$id,
+        {
+          saved: saved,
+        }
+      );
+    } else {
+      // create a new record
+      await database.createDocument(DATABASE_ID, "saved-movie", ID.unique(), {
+        id: id,
+        title: movie.title,
+        poster_path: movie.poster_path,
+        vote_average: movie.vote_average,
+        release_date: movie.release_date,
+        saved: saved,
+      });
+    }
+  } catch (error) {
+    console.error("updateSavedMovie error:", error);
+    throw error;
+  }
+};
+
+
+export const getSavedMovies = async (): Promise<
+  any[] | undefined
+> => {
+  try {
+    const result = await database.listDocuments(DATABASE_ID, "saved-movie", [
+      Query.equal("saved",true),
+    ]);
+
+    return result.documents as unknown as Movie[];
+  } catch (error) {
+    console.error(error);
+    return undefined;
+  }
+};
+
+export const getSavedMovieById = async (id: string): Promise<
+  Movie[] | undefined
+> => {
+  try {
+    const result = await database.listDocuments(DATABASE_ID, "saved-movie", [
+      Query.equal("id", id),
+    ]);
+
+    return result.documents as unknown as Movie[];
   } catch (error) {
     console.error(error);
     return undefined;

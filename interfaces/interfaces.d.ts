@@ -12,6 +12,7 @@ interface Movie {
   release_date: string;
   video: boolean;
   vote_average: number;
+  saved: boolean;
   vote_count: number;
 }
 

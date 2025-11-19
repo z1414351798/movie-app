@@ -1,7 +1,8 @@
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "expo-router";
-import { View, Text, TextInput, Button } from "react-native";
+import { View, Text, TextInput, Button, Image } from "react-native";
 import { useState } from "react";
+import { icons } from "@/constants/icons";
 
 export default function Signup() {
   const { signup } = useAuth();
@@ -18,6 +19,10 @@ export default function Signup() {
 
   return (
     <View className="flex-1 justify-center p-10 bg-primary">
+      <Image
+        source={icons.logo}
+        className="w-12 h-10 mt-20 mb-5 mx-auto"
+      />
       <Text className="text-white text-2xl mb-6">Sign Up</Text>
 
       <TextInput

@@ -59,10 +59,11 @@ export const getTrendingMovies = async (): Promise<
 
 };
 
-export const updateSavedMovie = async (id: string, movie: MovieDetails, saved: boolean) => {
+export const updateSavedMovie = async (id: string, movie: MovieDetails, saved: boolean, user_id: string) => {
   try {
     const result = await database.listDocuments(DATABASE_ID, "saved-movie", [
-      Query.equal("id", id),
+      Query.equal("movie_id", id),
+      Query.equal("user_id",user_id)
     ]);
 
     if (result.documents.length > 0) {
@@ -78,12 +79,13 @@ export const updateSavedMovie = async (id: string, movie: MovieDetails, saved: b
     } else {
       // create a new record
       await database.createDocument(DATABASE_ID, "saved-movie", ID.unique(), {
-        id: id,
+        movie_id: id,
         title: movie.title,
         poster_path: movie.poster_path,
         vote_average: movie.vote_average,
         release_date: movie.release_date,
         saved: saved,
+        user_id: user_id
       });
     }
   } catch (error) {
@@ -93,30 +95,32 @@ export const updateSavedMovie = async (id: string, movie: MovieDetails, saved: b
 };
 
 
-export const getSavedMovies = async (): Promise<
+export const getSavedMovies = async (user_id:string): Promise<
   any[] | undefined
 > => {
   try {
     const result = await database.listDocuments(DATABASE_ID, "saved-movie", [
       Query.equal("saved",true),
+      Query.equal("user_id",user_id)
     ]);
 
-    return result.documents as unknown as Movie[];
+    return result.documents as unknown as [];
   } catch (error) {
     console.error(error);
     return undefined;
   }
 };
 
-export const getSavedMovieById = async (id: string): Promise<
-  Movie[] | undefined
+export const getSavedMovieById = async (id: string, user_id: string): Promise<
+  any[] | undefined
 > => {
   try {
     const result = await database.listDocuments(DATABASE_ID, "saved-movie", [
-      Query.equal("id", id),
+      Query.equal("movie_id", id),
+      Query.equal("user_id",user_id)
     ]);
 
-    return result.documents as unknown as Movie[];
+    return result.documents as unknown as [];
   } catch (error) {
     console.error(error);
     return undefined;

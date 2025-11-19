@@ -1,16 +1,31 @@
-import { icons } from "@/constants/icons";
-import { View, Text, Image } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { useAuth } from "@/context/AuthContext";
+import { View, Text, Button } from "react-native";
+import { useRouter } from "expo-router";
+import { useEffect } from "react";
 
-const Profile = () => {
+
+
+export default function Profile() {
+
+  const { user, authLoading, logout } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!authLoading && !user) {
+      router.replace("/(auth)/login");
+    }
+  }, [user, authLoading, router]);
+
+  if (authLoading || !user) {
+    return null; // or a loading indicator
+  }
+
   return (
-    <SafeAreaView className="bg-primary flex-1 px-10">
-      <View className="flex justify-center items-center flex-1 flex-col gap-5">
-        <Image source={icons.person} className="size-10" tintColor="#fff" />
-        <Text className="text-gray-500 text-base">Profile</Text>
-      </View>
-    </SafeAreaView>
-  );
-};
+    <View className="flex-1 bg-primary justify-center items-center">
+      <Text className="text-white text-xl mb-4">{user?.name}</Text>
+      <Text className="text-gray-400 mb-10">{user?.email}</Text>
 
-export default Profile;
+      <Button title="Logout" onPress={logout} />
+    </View>
+  );
+}

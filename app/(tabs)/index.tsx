@@ -19,6 +19,9 @@ import SearchBar from "@/components/SearchBar";
 import MovieCard from "@/components/MovieCard";
 import TrendingCard from "@/components/TrendingCard";
 import MovieList from "@/components/MovieList";
+import { useAuth } from "@/context/AuthContext";
+import { useEffect } from "react";
+
 
 
 const Index = () => {
@@ -35,6 +38,18 @@ const Index = () => {
     loading: moviesLoading,
     error: moviesError,
   } = useFetch(() => fetchMovies({ query: "" }));
+
+  const { user, authLoading } = useAuth();
+
+  useEffect(() => {
+    if (!authLoading && !user) {
+      router.replace("/(auth)/login");
+    }
+  }, [user, authLoading, router]);
+
+  if (authLoading || !user) {
+    return null; // or a loading indicator
+  }
 
   return (
     <View className="flex-1 bg-primary">

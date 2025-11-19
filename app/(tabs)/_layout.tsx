@@ -3,6 +3,9 @@ import { ImageBackground, Image, Text, View } from "react-native";
 
 import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";
+import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "expo-router";
+import { useEffect } from "react";
 
 function TabIcon({ focused, icon, title }: any) {
   if (focused) {
@@ -27,6 +30,19 @@ function TabIcon({ focused, icon, title }: any) {
 }
 
 export default function TabsLayout() {
+    const { user, authLoading } = useAuth();
+    const router = useRouter();
+  
+    useEffect(() => {
+      if (!authLoading && !user) {
+        router.replace("/(auth)/login");
+      }
+    }, [user, authLoading, router]);
+  
+    if (authLoading || !user) {
+      return null; // or a loading indicator
+    }
+    
   return (
     <Tabs
       screenOptions={{

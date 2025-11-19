@@ -18,6 +18,7 @@ import { fetchMovieDetails, fetchMovieVideos } from "@/services/api";
 import TrailerPlayer from "@/components/TrailerPlayer";
 import { getSavedMovieById } from "@/services/appwrite";
 import { updateSavedMovie } from "@/services/appwrite";
+import { useAuth } from "@/context/AuthContext";
 
 
 interface MovieInfoProps {
@@ -41,41 +42,39 @@ const MovieInfo = ({ label, value }: MovieInfoProps) => (
 const Details = () => {
   const router = useRouter();
   const { id } = useLocalSearchParams();
-  const [showTrailer, setShowTrailer] = useState(false);  
+  const [showTrailer, setShowTrailer] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
+  const { user, authLoading } = useAuth();
+  const user_id = user.$id;
 
   const { data: movie, loading } = useFetch(() =>
     fetchMovieDetails(id as string)
   );
   const { data: videos } = useFetch(() => fetchMovieVideos(id as string));
-  const {
-    data: savedMovie,
-    loading: savedLoading,
-    error: savedError,
-  } = useFetch(() => getSavedMovieById(id));
+  const { data: savedMovie, loading: savedLoading, error: savedError } = useFetch(
+    () => user_id ? getSavedMovieById(id, user_id) : Promise.resolve([])
+  );
   useEffect(() => {
-  if (!savedMovie || savedMovie.length === 0) {
-    setIsSaved(false);  // no document → not saved
-  } else {
-    setIsSaved(savedMovie[0].saved === true); // read saved field
-  }
-}, [savedMovie]);
+    if (!savedMovie || savedMovie.length === 0) {
+      setIsSaved(false);  // no document → not saved
+    } else {
+      setIsSaved(savedMovie[0].saved === true); // read saved field
+    }
+  }, [savedMovie]);
 
-const toggleSave = async () => {
-  if (!movie) return;
+  const toggleSave = async () => {
+    if (!movie) return;
 
-  const newState = !isSaved;
+    const newState = !isSaved;
 
-  try {
-    await updateSavedMovie(id, movie, newState); 
-    setIsSaved(newState);
-  } catch (e) {
-    console.error(e);
-    alert("Failed to update saved state");
-  }
-};
-
-
+    try {
+      await updateSavedMovie(id, movie, newState, user_id);
+      setIsSaved(newState);
+    } catch (e) {
+      console.error(e);
+      alert("Failed to update saved state");
+    }
+  };
 
 
   const trailer = videos?.results?.find(
@@ -123,13 +122,13 @@ const toggleSave = async () => {
         <View className="flex-col items-start justify-center mt-5 px-5">
           <Text className="text-white font-bold text-xl">{movie?.title}</Text>
           <TouchableOpacity
-  onPress={toggleSave}
-  className="absolute top-5 right-5 bg-black/50 p-3 rounded-full"
->
-  <Text className="text-white text-2xl">
-    {isSaved ? "❤️" : "🤍"}
-  </Text>
-</TouchableOpacity>
+            onPress={toggleSave}
+            className="absolute top-5 right-5 bg-black/50 p-3 rounded-full"
+          >
+            <Text className="text-white text-2xl">
+              {isSaved ? "❤️" : "🤍"}
+            </Text>
+          </TouchableOpacity>
 
           <View className="flex-row items-center gap-x-1 mt-2">
             <Text className="text-light-200 text-sm">
@@ -188,7 +187,7 @@ const toggleSave = async () => {
             <Text className="text-black font-bold">Close</Text>
           </TouchableOpacity>
 
-          <TrailerPlayer videoKey= {trailerKey}></TrailerPlayer>
+          <TrailerPlayer videoKey={trailerKey}></TrailerPlayer>
 
         </SafeAreaView>
       </Modal>

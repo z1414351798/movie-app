@@ -7,16 +7,21 @@ import { images } from "@/constants/images";
 
 import { View, ScrollView, FlatList, Image, Text } from "react-native";
 import { useFocusEffect } from "expo-router";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
+import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "expo-router";
+
 
 
 const Save = () => {
-  const [savedMovies, setSavedMovies] = useState<Movie[]>();
+  const [savedMovies, setSavedMovies] = useState();
   const [loading, setLoading] = useState(true);
+  const { user, authLoading } = useAuth();
+  const user_id = user.$id;
 
   const loadSaved = async () => {
     setLoading(true);
-    const data = await getSavedMovies();
+    const data = await getSavedMovies(user_id);
     setSavedMovies(data || []);
     setLoading(false);
   };
@@ -27,6 +32,18 @@ const Save = () => {
       loadSaved();
     }, [])
   );
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!authLoading && !user) {
+      router.replace("/(auth)/login");
+    }
+  }, [user, authLoading, router]);
+
+  if (authLoading || !user) {
+    return null; // or a loading indicator
+  }
 
   return (
     <View className="flex-1 bg-primary">
@@ -45,7 +62,7 @@ const Save = () => {
           <FlatList
             data={savedMovies}
             renderItem={({ item }) => <MovieCard {...item} />}
-            keyExtractor={(item) => item.id.toString()}
+            keyExtractor={(item) => item.movie_id.toString()}
             numColumns={3}
             columnWrapperStyle={{
               justifyContent: "flex-start",

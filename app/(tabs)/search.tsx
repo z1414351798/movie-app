@@ -10,6 +10,9 @@ import { updateSearchCount } from "@/services/appwrite";
 
 import SearchBar from "@/components/SearchBar";
 import MovieDisplayCard from "@/components/MovieCard";
+import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "expo-router";
+
 
 const Search = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -25,6 +28,19 @@ const Search = () => {
   const handleSearch = (text: string) => {
     setSearchQuery(text);
   };
+
+  const { user, authLoading } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!authLoading && !user) {
+      router.replace("/(auth)/login");
+    }
+  }, [user, authLoading, router]);
+
+  if (authLoading || !user) {
+    return null; // or a loading indicator
+  }
 
   // Debounced search effect
   useEffect(() => {

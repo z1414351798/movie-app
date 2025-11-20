@@ -5,11 +5,11 @@ import {
   ActivityIndicator,
   ScrollView,
   TouchableOpacity,
+  Alert
 } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Modal } from "react-native";
-import { WebView } from "react-native-webview";
 import { useEffect, useState, version } from "react";
 import { icons } from "@/constants/icons";
 import useFetch from "@/services/usefetch";
@@ -45,36 +45,50 @@ const Details = () => {
   const [showTrailer, setShowTrailer] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
   const { user, authLoading } = useAuth();
-  const user_id = user.$id;
+  const user_id = user?.$id ?? null;
 
   const { data: movie, loading } = useFetch(() =>
     fetchMovieDetails(id as string)
   );
   const { data: videos } = useFetch(() => fetchMovieVideos(id as string));
   const { data: savedMovie, loading: savedLoading, error: savedError } = useFetch(
-    () => user_id ? getSavedMovieById(id, user_id) : Promise.resolve([])
+    () => user_id ? getSavedMovieById(id, user_id) : Promise.resolve(null)
   );
   useEffect(() => {
-    if (!savedMovie || savedMovie.length === 0) {
-      setIsSaved(false);  // no document → not saved
-    } else {
-      setIsSaved(savedMovie[0].saved === true); // read saved field
+    if (!user_id) {
+      setIsSaved(false); // user not logged in → always not saved
+      return;
     }
-  }, [savedMovie]);
+
+    // logged in:
+    if (!savedMovie) {
+      setIsSaved(false);
+    } else {
+      setIsSaved(savedMovie.saved === true);
+    }
+  }, [savedMovie, user_id]);
+
 
   const toggleSave = async () => {
-    if (!movie) return;
+    if (!user) {
+      Alert.alert(
+        "Login Required",
+        "You must login to save movies.",
+        [
+          { text: "Cancel", style: "cancel" },
+          { text: "Login", onPress: () => router.push("/(auth)/login") }
+        ]
+      );
+      return;
+    }
 
     const newState = !isSaved;
-
-    try {
-      await updateSavedMovie(id, movie, newState, user_id);
-      setIsSaved(newState);
-    } catch (e) {
-      console.error(e);
-      alert("Failed to update saved state");
-    }
+    await updateSavedMovie(id, movie, newState, user_id);
+    setIsSaved(newState);
   };
+
+
+
 
 
   const trailer = videos?.results?.find(

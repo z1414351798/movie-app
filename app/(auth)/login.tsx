@@ -15,10 +15,7 @@ export default function Login() {
     if (user) {
       router.replace("/(tabs)"); // navigate after render
     }
-  }, [user, router]);
-
-  // optional: render a loader or login form
-  if (user) return null;
+  }, [user]);
 
   return (
     <View className="flex-1 justify-center p-10 bg-primary">

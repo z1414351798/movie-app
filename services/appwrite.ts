@@ -112,7 +112,7 @@ export const getSavedMovies = async (user_id:string): Promise<
 };
 
 export const getSavedMovieById = async (id: string, user_id: string): Promise<
-  any[] | undefined
+  any | undefined
 > => {
   try {
     const result = await database.listDocuments(DATABASE_ID, "saved-movie", [

@@ -8,30 +8,22 @@ import { icons } from "@/constants/icons";
 
 
 export default function Profile() {
-
-  const { user, authLoading, logout } = useAuth();
+  const { user, logout } = useAuth();
   const router = useRouter();
 
-  useEffect(() => {
-    if (!authLoading && !user) {
-      router.replace("/(auth)/login");
-    }
-  }, [user, authLoading, router]);
-
-  if (authLoading || !user) {
-    return null; // or a loading indicator
+  if (!user) {
+    return (
+      <View className="flex-1 justify-center items-center bg-primary">
+        <Text className="text-white mb-3">You are not logged in</Text>
+        <Button title="Login" onPress={() => router.push("/(auth)/login")} />
+      </View>
+    );
   }
 
   return (
     <View className="flex-1 bg-primary justify-center items-center">
-
-      <Image
-        source={icons.logo}
-        className="w-12 h-10 mt-20 mb-5 mx-auto"
-      />
-      <Text className="text-white text-xl mb-4">{user?.name}</Text>
-      <Text className="text-gray-400 mb-10">{user?.email}</Text>
-
+      <Text className="text-white text-xl mb-4">{user.name}</Text>
+      <Text className="text-gray-400 mb-10">{user.email}</Text>
       <Button title="Logout" onPress={logout} />
     </View>
   );

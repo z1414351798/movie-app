@@ -17,11 +17,9 @@ import { icons } from "@/constants/icons";
 import MovieCard from "@/components/MovieCard";
 import TrendingCard from "@/components/TrendingCard";
 import SearchBar from "@/components/SearchBar";
-import { useAuth } from "@/context/AuthContext";
 
 const Index = () => {
   const router = useRouter();
-  const { user, authLoading } = useAuth();
 
   // trending
   const { data: trendingMovies, loading: trendingLoading } =
@@ -57,8 +55,6 @@ const Index = () => {
   useEffect(() => {
     loadMovies(1);
   }, []);
-
-  if (authLoading || !user) return null;
 
   return (
     <View className="flex-1 bg-primary">

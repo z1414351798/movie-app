@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import { Alert } from "react-native";
 import { Account, Client, ID } from "react-native-appwrite";
 
 const client = new Client()
@@ -7,7 +8,13 @@ const client = new Client()
 
 const account = new Account(client);
 
-const AuthContext = createContext(null);
+const AuthContext = createContext({
+  user: null,
+  authLoading: true,
+  login: async () => {},
+  signup: async () => {},
+  logout: async () => {},
+});
 
 export function AuthProvider({ children }: any) {
   const [user, setUser] = useState(null);

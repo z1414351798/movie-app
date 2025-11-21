@@ -1,287 +1,165 @@
-<div align="center">
-  <br />
-    <a href="https://www.youtube.com/watch?v=f8Z9JyB2EIE" target="_blank">
-      <img src="assets/readme/hero.webp" alt="Project Banner">
-    </a>
-  <br />
+# 🎬 Movie Master
 
-  <div>
-    <img src="https://img.shields.io/badge/-React_Native-black?style=for-the-badge&logoColor=white&logo=react&color=61DAFB" alt="React Native" />
-    <img src="https://img.shields.io/badge/-Expo-black?style=for-the-badge&logoColor=white&logo=expo&color=000020" alt="Expo" />
-    <img src="https://img.shields.io/badge/-TypeScript-black?style=for-the-badge&logoColor=white&logo=typescript&color=3178C6" alt="TypeScript" />
-    <img src="https://img.shields.io/badge/-Tailwind_CSS-black?style=for-the-badge&logoColor=white&logo=tailwindcss&color=06B6D4" alt="Tailwind CSS" />
-    <img src="https://img.shields.io/badge/-Appwrite-black?style=for-the-badge&logoColor=white&logo=appwrite&color=F02E65" alt="Appwrite" />
-  </div>
+*A beautiful React Native movie browsing app built with Expo 52.*
 
-  <h3 align="center">A Movie Finding App with Extensive Search</h3>
+## 🚀 Features
 
-   <div align="center">
-     Build this project step by step with our detailed tutorial on <a href="https://www.youtube.com/@javascriptmastery/videos" target="_blank"><b>JavaScript Mastery</b></a> YouTube. Join the JSM family!
-    </div>
-</div>
+* Browse popular, top-rated, and upcoming movies
+* Detailed movie info page
+* Play trailers
+* Google AdMob integration using `react-native-google-mobile-ads@14.11.0`
+* Responsive UI
+* Fast navigation
 
-## 📋 <a name="table">Table of Contents</a>
+---
 
-1. 🤖 [Introduction](#introduction)
+## 📦 Tech Stack
 
-2. ⚙️ [Tech Stack](#tech-stack)
 
-3. 🔋 [Features](#features)
+| Area       | Tech                                       |
+| ---------- | ------------------------------------------ |
+| Framework  | **Expo SDK 52**(React Native)              |
+| Language   | JavaScript / TypeScript                    |
+| Ads        | **react-native-google-mobile-ads@14.11.0** |
+| Navigation | React Navigation                           |
+| API        | TheMovieDB (TMDB)                          |
+| Build      | EAS Build                                  |
 
-4. 🤸 [Quick Start](#quick-start)
+---
 
-5. 🕸️ [Snippets (Code to Copy)](#snippets)
+## 🧰 Prerequisites
 
-6. 🔗 [Assets](#links)
+Before running the app, make sure you have:
 
-7. 🚀 [More](#more)
+* Node.js ≥ 18
+* Expo CLI
+* TMDB API Key
+* Android SDK (for local Android builds)
+* `jenv` for Java version switching (use Java 21):
+  <pre class="overflow-visible!" data-start="1221" data-end="1250"><div class="contain-inline-size rounded-2xl relative bg-token-sidebar-surface-primary"><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-bg-elevated-secondary text-token-text-secondary flex items-center gap-4 rounded-sm px-2 font-sans text-xs"></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-bash"><span><span>jenv </span><span>local</span><span> 21
+  </span></span></code></div></div></pre>
 
-## 🚨 Tutorial
+---
 
-This repository contains the code corresponding to an in-depth tutorial available on our YouTube channel, <a href="https://www.youtube.com/@javascriptmastery/videos" target="_blank"><b>JavaScript Mastery</b></a>.
+## 🔧 Installation
 
-If you prefer visual learning, this is the perfect resource for you. Follow our tutorial to learn how to build projects like these step-by-step in a beginner-friendly manner!
-
-<a href="https://www.youtube.com/watch?v=f8Z9JyB2EIE" target="_blank"><img src="https://github.com/sujatagunale/EasyRead/assets/151519281/1736fca5-a031-4854-8c09-bc110e3bc16d" /></a>
-
-## <a name="introduction">🤖 Introduction</a>
-
-Built with Expo, TypeScript, and Tailwind CSS, this app fetches movies and creates a popularity algorithm using Appwrite. It provides users with a seamless browsing experience, ranking movies based on various engagement metrics. The app leverages modern UI/UX principles for a responsive and visually appealing interface, ensuring real-world scalability and performance.
-
-If you're getting started and need assistance or face any bugs, join our active Discord community with over **50k+** members. It's a place where people help each other out.
-
-<a href="https://discord.com/invite/n6EdbFJ" target="_blank"><img src="https://github.com/sujatagunale/EasyRead/assets/151519281/618f4872-1e10-42da-8213-1d69e486d02e" /></a>
-
-## <a name="tech-stack">⚙️ Tech Stack</a>
-
-- **[Expo](https://expo.dev/)** is an open-source platform for building universal native apps (Android, iOS, web) using JavaScript/TypeScript and React Native. It features file-based routing via Expo Router, fast refresh, native modules for camera/maps/notifications, over-the-air updates (EAS), and streamlined app deployment.
-
-- **[React Native](https://reactnative.dev/)** is a framework for building mobile UIs with React. It enables component‑based, cross-platform development with declarative UI, deep native API support, and is tightly integrated with Expo for navigation and native capabilities.
-
-- **[Appwrite](https://jsm.dev/rn25-appwrite)** is an open-source backend-as-a-service platform offering secure authentication (email/password, OAuth, SMS, magic links), databases, file storage with compression/encryption, real-time messaging, serverless functions, and static site hosting via Appwrite Sites—all managed through a unified console and microservices architecture.
-
-- **[TypeScript](https://www.typescriptlang.org/)** is a statically-typed superset of JavaScript providing type annotations, interfaces, enums, generics, and enhanced tooling. It improves error detection, code quality, and scalability—ideal for robust, maintainable projects.
-
-- **[Tailwind CSS](https://tailwindcss.com/)** is a utility-first CSS framework enabling rapid UI design via low-level classes. In React Native/Expo, it’s commonly used with NativeWind to apply Tailwind-style utilities to mobile components.
-
-- **[NativeWind](https://www.nativewind.dev/)** brings Tailwind CSS to React Native and Expo, allowing you to style mobile components using utility-first classes for fast, consistent, and responsive UI design.
-
-## <a name="features">🔋 Features</a>
-
-### Features of the Mobile Movie AppProject
-
-👉 **Real-time data**: Fetching and displaying real-time movie data
-
-👉 **Home Page**: Featured and discover movies
-
-👉 **Search Page**: Search for your favorite movies
-
-👉 **Popularity algorithm**: Track user searches to display the most popular movies
-
-and many more, including code architecture and reusability.
-
-## <a name="quick-start">🤸 Quick Start</a>
-
-Follow these steps to set up the project locally on your machine.
-
-**Prerequisites**
-
-Make sure you have the following installed on your machine:
-
-- [Git](https://git-scm.com/)
-
-- [Node.js](https://nodejs.org/en)
-
-- [npm](https://www.npmjs.com/) (Node Package Manager)
-
-**Cloning the Repository**
-
-```bash
-git clone https://github.com/adrianhajdin/rn-movie-app.git
-
-cd rn-movie-app
-```
-
-**Installation**
-
-Install the project dependencies using npm:
-
-```bash
+<pre class="overflow-visible!" data-start="1277" data-end="1396"><div class="contain-inline-size rounded-2xl relative bg-token-sidebar-surface-primary"><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-bg-elevated-secondary text-token-text-secondary flex items-center gap-4 rounded-sm px-2 font-sans text-xs"></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-bash"><span><span>git </span><span>clone</span><span> https://github.com/your-username/react-native-movie-app.git
+</span><span>cd</span><span> react-native-movie-app
 npm install
-```
+</span></span></code></div></div></pre>
 
-**Set Up Environment Variables**
-
-Create a new file named `.env` in the root of your project and add the following content:
-
-```env
+Set your environment files:
 
 EXPO_PUBLIC_MOVIE_API_KEY=
-
 EXPO_PUBLIC_APPWRITE_PROJECT_ID=
-
 EXPO_PUBLIC_APPWRITE_DATABASE_ID=
+EXPO_PUBLIC_APPWRITE_ENDPOINT = "https://sgp.cloud.appwrite.io/v1"
 
-EXPO_PUBLIC_APPWRITE_COLLECTION_ID=
-```
 
-Replace the placeholder values with your actual TMDB API key, Appwrite project ID, Database ID, and Collection ID. You can obtain these credentials by signing up on the [Appwrite](https://jsm.dev/rn25-appwrite), [TMDB](https://www.themoviedb.org/login).
 
-**Running the Project**
+---
 
-```bash
+## ▶️ Running the App
 
-npx expo start
+### Start Expo
 
-```
+<pre class="overflow-visible!" data-start="1615" data-end="1636"><div class="contain-inline-size rounded-2xl relative bg-token-sidebar-surface-primary"><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-bg-elevated-secondary text-token-text-secondary flex items-center gap-4 rounded-sm px-2 font-sans text-xs"></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-bash"><span><span>npm start
+</span></span></code></div></div></pre>
 
-Open your ExpoGO app on your phone and scan the QR code to view the project.
+### Run on iOS
 
-## <a name="snippets">🕸️ Snippets</a>
+<pre class="overflow-visible!" data-start="1653" data-end="1676"><div class="contain-inline-size rounded-2xl relative bg-token-sidebar-surface-primary"><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-bg-elevated-secondary text-token-text-secondary flex items-center gap-4 rounded-sm px-2 font-sans text-xs"></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-bash"><span><span>npm run ios
+</span></span></code></div></div></pre>
 
-<details>
+### Run on Android
 
-<summary><code>tailwind.config.js</code></summary>
+<pre class="overflow-visible!" data-start="1697" data-end="1724"><div class="contain-inline-size rounded-2xl relative bg-token-sidebar-surface-primary"><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-bg-elevated-secondary text-token-text-secondary flex items-center gap-4 rounded-sm px-2 font-sans text-xs"></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-bash"><span><span>npm run android
+</span></span></code></div></div></pre>
 
-```typescript
-/** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: ["./app/**/*.{js,jsx,ts,tsx}", "./components/**/*.{js,jsx,ts,tsx}"],
-  presets: [require("nativewind/preset")],
-  theme: {
-    extend: {
-      colors: {
-        primary: "#030014",
-        secondary: "#151312",
-        ratingBox: "#221F3D",
-        searchBar: "#0F0D23",
-        text: "#9CA4AB",
-        darkAccent: "#AB8BFF",
-        accentText: "#A8B5DB",
-        secondaryText: "#D6C7FF",
-      },
-    },
-  },
-  plugins: [],
-};
-```
+---
 
-</details>
+## 📱 Google Mobile Ads (AdMob)
 
-<details>
+This project uses:
 
-<summary><code>app/globals.css</code></summary>
+<pre class="overflow-visible!" data-start="1784" data-end="1830"><div class="contain-inline-size rounded-2xl relative bg-token-sidebar-surface-primary"><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-bg-elevated-secondary text-token-text-secondary flex items-center gap-4 rounded-sm px-2 font-sans text-xs"></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre!"><span><span>react-native-google-mobile-ads</span><span>@14</span><span>.11.0
+</span></span></code></div></div></pre>
 
-```css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-```
+### ✔ Expo SDK 52 Compatibility
 
-</details>
+* Expo SDK 52 is built on React Native 0.76
+* `react-native-google-mobile-ads` 14.11.0 is compatible with RN 0.76
+* No config plugin needed; Expo runs in **custom dev client / EAS build only**.
 
-<details>
+### Add to `app.json`
 
-<summary><code>interfaces/interfaces.d.ts</code></summary>
+<pre class="overflow-visible!" data-start="2086" data-end="2279"><div class="contain-inline-size rounded-2xl relative bg-token-sidebar-surface-primary"><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-bg-elevated-secondary text-token-text-secondary flex items-center gap-4 rounded-sm px-2 font-sans text-xs"></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-json"><span><span>{</span><span>
+  </span><span>"plugins"</span><span>:</span><span> </span><span>[</span><span>
+    </span><span>[</span><span>
+      </span><span>"react-native-google-mobile-ads"</span><span>,</span><span>
+      </span><span>{</span><span>
+        </span><span>"android_app_id"</span><span>:</span><span> </span><span>"ca-app-pub-xxx~xxx"</span><span>,</span><span>
+        </span><span>"ios_app_id"</span><span>:</span><span> </span><span>"ca-app-pub-xxx~xxx"</span><span>
+      </span><span>}</span><span>
+    </span><span>]</span><span>
+  </span><span>]</span><span>
+</span><span>}</span><span>
+</span></span></code></div></div></pre>
 
-```typescript
-interface Movie {
-  id: number;
-  title: string;
-  adult: boolean;
-  backdrop_path: string;
-  genre_ids: number[];
-  original_language: string;
-  original_title: string;
-  overview: string;
-  popularity: number;
-  poster_path: string;
-  release_date: string;
-  video: boolean;
-  vote_average: number;
-  vote_count: number;
-}
+---
 
-interface TrendingMovie {
-  searchTerm: string;
-  movie_id: number;
-  title: string;
-  count: number;
-  poster_url: string;
-}
+## 🛠 Build with EAS
 
-interface MovieDetails {
-  adult: boolean;
-  backdrop_path: string | null;
-  belongs_to_collection: {
-    id: number;
-    name: string;
-    poster_path: string;
-    backdrop_path: string;
-  } | null;
-  budget: number;
-  genres: {
-    id: number;
-    name: string;
-  }[];
-  homepage: string | null;
-  id: number;
-  imdb_id: string | null;
-  original_language: string;
-  original_title: string;
-  overview: string | null;
-  popularity: number;
-  poster_path: string | null;
-  production_companies: {
-    id: number;
-    logo_path: string | null;
-    name: string;
-    origin_country: string;
-  }[];
-  production_countries: {
-    iso_3166_1: string;
-    name: string;
-  }[];
-  release_date: string;
-  revenue: number;
-  runtime: number | null;
-  spoken_languages: {
-    english_name: string;
-    iso_639_1: string;
-    name: string;
-  }[];
-  status: string;
-  tagline: string | null;
-  title: string;
-  video: boolean;
-  vote_average: number;
-  vote_count: number;
-}
+### Install EAS
 
-interface TrendingCardProps {
-  movie: TrendingMovie;
-  index: number;
-}
-```
+<pre class="overflow-visible!" data-start="2324" data-end="2368"><div class="contain-inline-size rounded-2xl relative bg-token-sidebar-surface-primary"><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-bg-elevated-secondary text-token-text-secondary flex items-center gap-4 rounded-sm px-2 font-sans text-xs"></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-bash"><span><span>npm install -g eas-cli
+eas login
+</span></span></code></div></div></pre>
 
-</details>
+### Configure EAS
 
-## <a name="links">🔗 Assets</a>
+<pre class="overflow-visible!" data-start="2388" data-end="2419"><div class="contain-inline-size rounded-2xl relative bg-token-sidebar-surface-primary"><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-bg-elevated-secondary text-token-text-secondary flex items-center gap-4 rounded-sm px-2 font-sans text-xs"></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-bash"><span><span>eas build:configure
+</span></span></code></div></div></pre>
 
-Assets and snippets used in the project can be found in the **[video kit](https://jsm.dev/rn25-movie)**.
+### Build Android
 
-<a href="https://jsm.dev/rn25-movie" target="_blank">
-  <img src="assets/readme/videokit.webp" alt="Video Kit Banner">
-</a>
+<pre class="overflow-visible!" data-start="2439" data-end="2471"><div class="contain-inline-size rounded-2xl relative bg-token-sidebar-surface-primary"><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-bg-elevated-secondary text-token-text-secondary flex items-center gap-4 rounded-sm px-2 font-sans text-xs"></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-bash"><span><span>eas build -p android
+</span></span></code></div></div></pre>
 
-## <a name="more">🚀 More</a>
+### Build iOS
 
-**Advance your skills with Next.js Pro Course**
+<pre class="overflow-visible!" data-start="2487" data-end="2515"><div class="contain-inline-size rounded-2xl relative bg-token-sidebar-surface-primary"><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-bg-elevated-secondary text-token-text-secondary flex items-center gap-4 rounded-sm px-2 font-sans text-xs"></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-bash"><span><span>eas build -p ios
+</span></span></code></div></div></pre>
 
-Enjoyed creating this project? Dive deeper into our PRO courses for a richer learning adventure. They're packed with
+---
 
-detailed explanations, cool features, and exercises to boost your skills. Give it a go!
+## 🎞 TMDB API
 
-<a href="https://jsm.dev/rn25-jsm" target="_blank">
-   <img src="assets/readme/jsmpro.webp" alt="Project Banner">
-</a>
+The app uses TMDB endpoints:
+
+* `/movie/popular`
+* `/movie/top_rated`
+* `/movie/upcoming`
+* `/movie/{id}` (details)
+* `/movie/{id}/videos` (trailers)
+
+Example API call:
+
+<pre class="overflow-visible!" data-start="2708" data-end="2844"><div class="contain-inline-size rounded-2xl relative bg-token-sidebar-surface-primary"><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-bg-elevated-secondary text-token-text-secondary flex items-center gap-4 rounded-sm px-2 font-sans text-xs"></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-js"><span><span>const</span><span> response = </span><span>await</span><span> </span><span>fetch</span><span>(
+  </span><span>`https://api.themoviedb.org/3/movie/${id}</span><span>?api_key=</span><span>${process.env.EXPO_PUBLIC_MOVIE_API_KEY}</span><span>`
+);
+</span></span></code></div></div></pre>
+
+---
+
+## 🧩 Folder Structure
+
+<pre class="overflow-visible!" data-start="2875" data-end="3180"><div class="contain-inline-size rounded-2xl relative bg-token-sidebar-surface-primary"><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-bg-elevated-secondary text-token-text-secondary flex items-center gap-4 rounded-sm px-2 font-sans text-xs"></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre!"><span><span>react-native-movie-app/
+├── app/                   </span><span># Expo Router pages</span><span>
+├── components/            </span><span># UI components</span><span>
+├── hooks/                 </span><span># Custom hooks</span><span>
+├── screens/               </span><span># Screen components</span><span>
+├── services/              </span><span># API calls</span><span>
+├── assets/                </span><span># Images, fonts</span><span>
+└── app.json
+</span></span></code></div></div></pre>

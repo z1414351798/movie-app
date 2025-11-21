@@ -2,25 +2,15 @@ import { Stack } from "expo-router";
 import "./globals.css";
 import { StatusBar } from "react-native";
 import { AuthProvider } from "@/context/AuthContext";
-import {
-  InterstitialAd,
-  AdEventType,
-  TestIds
-} from 'react-native-google-mobile-ads';
+import { showInterstitialAd } from "@/ads/interstitial";
 import { useEffect } from "react";
 
-
 export default function RootLayout() {
+
+      // Show interstitial ad on app start
   useEffect(() => {
-    const showAd = async () => {
-      const interstitial = InterstitialAd.createForAdRequest(TestIds.INTERSTITIAL);
-
-      interstitial.load();
-
-      interstitial.addAdEventListener(AdEventType.LOADED, () => {
-        interstitial.show();
-      });
-    }}, []);
+    showInterstitialAd();
+  }, []);
 
   return (
     <>
@@ -48,7 +38,6 @@ export default function RootLayout() {
           />
         </Stack>
       </AuthProvider>
-
     </>
   );
 }
